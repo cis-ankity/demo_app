@@ -1,0 +1,26 @@
+<%= form_for @article do |form| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@article.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :text %><br>
+    <%= form.text_area :text %>
+  </p>
+  <%= link_to 'saving as permanent', article_path(@article), method: :put, remote: true, class: "btn btn-primary m-r10", data: { disable_with: 'saving...' } %>
+  <br>
+  <%= link_to 'saving as permanent with warning popup', article_path(@article), method: :put, remote: true, class: "btn btn-primary m-r10", data: { disable_with: 'saving...', confirm: 'Are you sure?' } %>
+<% end %>
